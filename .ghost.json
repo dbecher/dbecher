@@ -1,0 +1,10 @@
+{
+  "development": {
+    "apiUrl": "https://dbecher.site",
+    "contentApiKey": "ff6f4a05956fc5858d321134ee"
+  },
+  "production": {
+    "apiUrl": "https://dbecher.site",
+    "contentApiKey": "ff6f4a05956fc5858d321134ee"
+  }
+}

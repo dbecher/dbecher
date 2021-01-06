@@ -15,6 +15,7 @@ exports.createPages = async ({ graphql, actions }) => {
                 edges {
                     node {
                         slug
+                        url
                     }
                 }
             }
@@ -70,9 +71,8 @@ exports.createPages = async ({ graphql, actions }) => {
         const totalPosts = node.postCount !== null ? node.postCount : 0
         const numberOfPages = Math.ceil(totalPosts / postsPerPage)
 
-        // This part here defines, that our tag pages will use
-        // a `/tag/:slug/` permalink.
-        node.url = `/tag/${node.slug}/`
+        const url = new URL(node.url)
+        node.url = url.pathname
 
         Array.from({ length: numberOfPages }).forEach((_, i) => {
             const currentPage = i + 1
@@ -113,9 +113,8 @@ exports.createPages = async ({ graphql, actions }) => {
         const totalPosts = node.postCount !== null ? node.postCount : 0
         const numberOfPages = Math.ceil(totalPosts / postsPerPage)
 
-        // This part here defines, that our author pages will use
-        // a `/author/:slug/` permalink.
-        node.url = `/author/${node.slug}/`
+        const url = new URL(node.url)
+        node.url = url.pathname
 
         Array.from({ length: numberOfPages }).forEach((_, i) => {
             const currentPage = i + 1
@@ -153,9 +152,8 @@ exports.createPages = async ({ graphql, actions }) => {
 
     // Create pages
     pages.forEach(({ node }) => {
-        // This part here defines, that our pages will use
-        // a `/:slug/` permalink.
-        node.url = `/${node.slug}/`
+        const url = new URL(node.url)
+        node.url = url.pathname
 
         createPage({
             path: node.url,
@@ -170,9 +168,8 @@ exports.createPages = async ({ graphql, actions }) => {
 
     // Create post pages
     posts.forEach(({ node }) => {
-        // This part here defines, that our posts will use
-        // a `/:slug/` permalink.
-        node.url = `/${node.slug}/`
+        const url = new URL(node.url)
+        node.url = url.pathname
 
         createPage({
             path: node.url,

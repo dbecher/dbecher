@@ -5,7 +5,7 @@ import { Tags } from '@tryghost/helpers-gatsby'
 import { readingTime as readingTimeHelper } from '@tryghost/helpers'
 
 const PostCard = ({ post }) => {
-    const url = `/${post.slug}/`
+    const url = new URL(post.url).pathname
     const readingTime = readingTimeHelper(post)
 
     return (
@@ -41,6 +41,7 @@ const PostCard = ({ post }) => {
 PostCard.propTypes = {
     post: PropTypes.shape({
         slug: PropTypes.string.isRequired,
+        url: PropTypes.string.isRequired,
         title: PropTypes.string.isRequired,
         feature_image: PropTypes.string,
         featured: PropTypes.bool,
